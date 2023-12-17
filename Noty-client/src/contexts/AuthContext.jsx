@@ -5,8 +5,8 @@ export const AuthContext = createContext();
 export function AuthProvider(props) {
     
     const [accessData, setAccessData] = useState({
-        firstName: "",
-        email: "",
+        "authorization-token": "",
+        "_id": ""
 
     });
     useEffect(() => {
@@ -24,7 +24,7 @@ export function AuthProvider(props) {
 
     return (
         <AuthContext.Provider
-            value={{ accessData, setAccessData, isAuthenticated: !!accessData.email,}}
+            value={{ accessData, setAccessData, isAuthenticated: !!accessData['authorization-token'],}}
         >
             {props.children}
         </AuthContext.Provider>

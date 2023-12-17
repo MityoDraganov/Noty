@@ -4,30 +4,34 @@ import { useState } from "react"
 import { MoreHorizontal } from "lucide-react"
 import { deleteNote } from "../../../../api/requests"
 
-export const Note = ({ title, description, _id }) => {
+import { NotesNotifications } from "../../../../utilities/Notifications"
 
-    const [isOptionsOpen, setIsOptionsOpen] = useState(false)
+
+
+export const Note = ({ title, description, _id, setNotes, setEditingNote }) => {
+    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const handleDelete = async () => {
-        if(confirm("Are you sure that you want to delete that note?")){
-            await deleteNote(_id)
+        if (window.confirm("Are you sure that you want to delete that note?")) {
+            const result = await deleteNote(_id);
+            NotesNotifications.deleteNoteSuccess();
+            setNotes(result);
         }
-    }
+    };
 
     const handleEdit = () => {
+        setEditingNote({ title, description, _id });
+        setIsOptionsOpen(false);
+    };
 
-        
-    }
+    const handleTextAreaChange = (e) => {
+        setEditingNote((prevNote) => ({ ...prevNote, description: e.target.value }));
+    };
 
     return (
         <div className={styles["container"]}>
-
-
             <h1>{title}</h1>
-            <textarea readOnly>
-                {description}
-            </textarea>
-
+            <textarea readOnly={true} value={description} onChange={handleTextAreaChange} />
 
             <div className={styles["actions-container"]}>
                 <div onClick={() => setIsOptionsOpen(!isOptionsOpen)}>
@@ -35,14 +39,14 @@ export const Note = ({ title, description, _id }) => {
                 </div>
             </div>
 
-            <div className={styles["options-container"]} style={{ display: isOptionsOpen ? "block" : "none" }}>
-                <ul>
-                    <li onClick={handleEdit}>Edit</li>
-                    <li onClick={handleDelete}>Delete</li>
-                </ul>
-            </div>
-
-
+            {isOptionsOpen && (
+                <div className={styles["options-container"]}>
+                    <ul>
+                        <li onClick={handleEdit}>Edit</li>
+                        <li onClick={handleDelete}>Delete</li>
+                    </ul>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};

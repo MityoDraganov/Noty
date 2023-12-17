@@ -10,6 +10,7 @@ import { setAuth } from "../../../utilities/AuthStateController"
 
 import { useContext } from "react"
 import { AuthContext } from "../../../contexts/AuthContext"
+import { userLogin } from "../../../api/requests"
 
 
 export const Login = () => {
@@ -31,7 +32,7 @@ export const Login = () => {
     };
 
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         // Example usage
@@ -39,9 +40,10 @@ export const Login = () => {
             AuthNotifications.emptyFields();
             return;
         }
-
-        setAccessData(credentials)
-        setAuth(credentials)
+        const result = await userLogin(credentials)
+        
+        setAccessData(result)
+        setAuth(result)
         
         AuthNotifications.successAuth();
         navigate("/")

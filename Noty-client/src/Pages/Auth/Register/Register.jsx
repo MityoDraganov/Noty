@@ -6,10 +6,12 @@ import { AuthNotifications } from "../../../utilities/Notifications"
 
 import { BaseButton } from "../../../components/BaseButton/BaseButton"
 import { BaseInput } from "../../../components/BaseInput/BaseInput"
-import { setAuth } from "../../../utilities/AuthStateController"
 
 import { useContext } from "react"
 import { AuthContext } from "../../../contexts/AuthContext.jsx"
+import { userRegister } from "../../../api/requests"
+import { setAuth } from "../../../utilities/AuthStateController"
+
 
 export const Register = () => {
 
@@ -17,8 +19,7 @@ export const Register = () => {
     const navigate = useNavigate()
 
     const [credentials, setCredentials] = useState({
-        firstName: "",
-        lastName: "",
+        username: "",
         email: "",
         password: "",
         rePassword: ""
@@ -32,11 +33,11 @@ export const Register = () => {
     };
 
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         // Example usage
-        if (!credentials.firstName || !credentials.lastName || !credentials.email || !credentials.password || !credentials.rePassword) {
+        if (!credentials.username || !credentials.email || !credentials.password || !credentials.rePassword) {
             AuthNotifications.emptyFields();
             return;
         }
@@ -46,9 +47,11 @@ export const Register = () => {
             return;
         }
 
+
+        const result = await userRegister(credentials)
         
-        setAccessData(credentials)
-        setAuth(credentials)
+        setAccessData(result)
+        setAuth(result)
     
         AuthNotifications.successAuth();
 
@@ -61,11 +64,9 @@ export const Register = () => {
             <h1>Register</h1>
             <div className={styles["form-wrapper"]}>
                 <form onSubmit={onSubmitHandler}>
-                    <label>First name</label>
-                    <BaseInput onChange={onChangeHandler} value={credentials.firstName} name="firstName" />
+                    <label>Username</label>
+                    <BaseInput onChange={onChangeHandler} value={credentials.username} name="username" />
 
-                    <label>Last name</label>
-                    <BaseInput onChange={onChangeHandler} value={credentials.lastName} name="lastName" />
 
                     <label>E-mail</label>
                     <BaseInput onChange={onChangeHandler} value={credentials.email} name="email" />

@@ -1,19 +1,40 @@
 import styles from "./Navbar.module.css";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-//import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import { Menu } from "lucide-react";
+import { clearAuth } from "../../utilities/AuthStateController";
 
 export const Navbar = () => {
+
+    const navigate = useNavigate()
+
     const [isOpen, setIsOpen] = useState(false);
 
-    //const { isAuthenticated } = useContext(AuthContext);
-    const isAuthenticated = false
+    const { isAuthenticated, setAccessData } = useContext(AuthContext);
+
+    console.log(isAuthenticated);
 
     const closeNavigation = () => {
         setIsOpen(false);
+    };
+
+    const logoutHandler = () => {
+        if (confirm("Are you sure that you want to logout of your account?")) {
+            clearAuth();
+            setAccessData({
+                "authorization-token": "",
+                "_id": ""
+            });
+
+            // Close navigation after performing logout actions
+            closeNavigation();
+            
+            // Navigate to the login page
+            navigate("/login");
+        }
     };
 
     return (
@@ -44,13 +65,13 @@ export const Navbar = () => {
                                 <Link to="/profile" onClick={closeNavigation}>
                                     Profile
                                 </Link>
-                                <Link to="/logout" >
+                                <a onClick={logoutHandler}>
                                     Logout
-                                </Link>
+                                </a>
                             </>
                         ) : (
                             <>
-                                <Link to="/register" onClick={closeNavigation}>
+                                <Link to="/register" >
                                     Sign up
                                 </Link>
                             </>

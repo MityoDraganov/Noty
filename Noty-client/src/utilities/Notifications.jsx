@@ -10,10 +10,15 @@ export const AuthNotifications = {
 export const PermissionErrorNotifications = {
     notAuthenticatedToEnlist: () => errorNotification("In order to enlist in a course, please first sign in!"),
 }
+export const NotesNotifications = {
+    emptyFields: () => errorNotification("All form fields are required!"),
 
-export const successNotifications = {
-    courseEnlistSuccess: () => successNotification("You have successfully enlisted in the course!"),
+    createNoteSuccess: () => successNotification("Note successfuly created!"),
+    deleteNoteSuccess: () => successNotification("Note successfuly deleted!"),
+    editNoteSuccess: () => successNotification("Note successfuly edited!")
 }
+
+
 
 const defaultNotification = (message) => {
     toast(message, {

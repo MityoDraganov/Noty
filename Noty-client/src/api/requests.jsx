@@ -43,7 +43,7 @@ export const createNote = (body) => {
 }
 
 export const editNote = (id, body) => {
-    return api.post(endPoints.editItem(id), body)
+    return api.post(endPoints.editNote(id), body)
 }
 
 export const deleteNote = (id) => {
