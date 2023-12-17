@@ -1,0 +1,31 @@
+.container{
+    margin: 10% auto;
+    height: 60%;
+    width: 30%;
+}
+
+
+
+.form-wrapper form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-wrapper input{
+    margin-bottom: 4%;
+}
+
+.form-wrapper label{
+    text-align: left;
+}
+
+.form-wrapper a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+}
+
+.button-wrapper{
+    margin: 2% auto;
+    width: 65%;
+}

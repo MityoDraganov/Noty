@@ -7,6 +7,8 @@
     height: 60%;
     border: 2px solid #fff;
     padding: 1%;
+    background-color: #242424;
+    border-radius: 0.4rem;
 }
 
 .content{
@@ -41,4 +43,8 @@
     padding: 3% 3%;
     border-radius: 0.3em;
     font-size: large;
+}
+
+.btn-wrapper{
+    margin-top: 4%;
 }

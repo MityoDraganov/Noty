@@ -1,0 +1,55 @@
+import {toast} from "react-toastify"
+
+export const AuthNotifications = {
+    emptyFields: () => errorNotification("All form fields are required!"),
+    passwordsDoNotMatch: () => errorNotification("Passwords do not match!"),
+
+    successAuth: () => successNotification("You have successfully been authenticated."),
+};
+
+export const PermissionErrorNotifications = {
+    notAuthenticatedToEnlist: () => errorNotification("In order to enlist in a course, please first sign in!"),
+}
+
+export const successNotifications = {
+    courseEnlistSuccess: () => successNotification("You have successfully enlisted in the course!"),
+}
+
+const defaultNotification = (message) => {
+    toast(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+}
+
+const errorNotification = (message) => {
+    toast.error(message , {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+}
+
+const successNotification = (message) => {
+    toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+}
