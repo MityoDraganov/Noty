@@ -8,14 +8,14 @@ import { NotesNotifications } from "../../../../utilities/Notifications"
 
 
 
-export const Note = ({ title, description, _id, setNoteGroups, setEditingNote }) => {
+export const Note = ({ title, description, _id, setNotes, setEditingNote }) => {
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure that you want to delete that note?")) {
             const result = await deleteNote(_id);
             NotesNotifications.deleteNoteSuccess();
-            setNoteGroups(result);
+            setNotes(result);
         }
     };
 

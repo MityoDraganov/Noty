@@ -5,11 +5,11 @@ import { useState } from "react"
 import { BaseInput } from "../../../../components/BaseInput/BaseInput"
 import { BaseButton } from "../../../../components/BaseButton/BaseButton"
 
-import { createNoteGroup } from "../../../../api/requests"
+import { createNote } from "../../../../api/requests"
 
 import { NotesNotifications } from "../../../../utilities/Notifications"
 
-export const AddNoteModal = ({closeModal, setNoteGroups}) => {
+export const AddNoteModal = ({closeModal, setNotes}) => {
 
     const [data, setData] = useState({
         title: "",
@@ -23,8 +23,8 @@ export const AddNoteModal = ({closeModal, setNoteGroups}) => {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        const notes = await createNoteGroup(data)
-        setNoteGroups(notes)
+        const notes = await createNote(data)
+        setNotes(notes)
 
         NotesNotifications.createNoteSuccess()
         closeModal()

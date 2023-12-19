@@ -3,9 +3,13 @@ import * as api from "./api.jsx"
 
 const endPoints = {
 
+    //noteGroups
+    createNoteGroup: "noteGroups/create",
+    getNoteGroups: "noteGroups",
+
     //notes
-    getAllNotes: "notes",
-    createNote: "notes/create",
+    getAllNotes: (groupId) => `notes/${groupId}`,
+    createNote: "notes/create/test",
     editNote: (itemId) => `notes/edit/${itemId}`,
     deleteNote: (itemId) => `notes/${itemId}`,
     //noteDetails: (itemId) => `items/getItem/${itemId}`,
@@ -29,6 +33,16 @@ export const userLogin = (body) => {
 
 export const userProfile = () => {
     return api.get(endPoints.userProfile)
+}
+
+
+//note groups
+export const createNoteGroup = (body) => {
+    return api.post(endPoints.createNoteGroup, body)
+}
+
+export const getAllNoteGroups = () => {
+    return api.get(endPoints.getNoteGroups)
 }
 
 

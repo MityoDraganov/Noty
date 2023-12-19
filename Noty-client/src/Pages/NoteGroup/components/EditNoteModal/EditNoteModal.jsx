@@ -1,19 +1,19 @@
 
-import styles from "./AddNoteModal.module.css"
+import styles from "./EditNoteModal.module.css"
 import { useState } from "react"
 
 import { BaseInput } from "../../../../components/BaseInput/BaseInput"
 import { BaseButton } from "../../../../components/BaseButton/BaseButton"
 
-import { createNoteGroup } from "../../../../api/requests"
+import { editNote } from "../../../../api/requests"
 
-import { NotesNotifications } from "../../../../utilities/Notifications"
+import {NotesNotifications} from "../../../../utilities/Notifications"
 
-export const AddNoteModal = ({closeModal, setNoteGroups}) => {
+export const EditNoteModal = ({closeModal, setNotes, title, description, _id}) => {
 
     const [data, setData] = useState({
-        title: "",
-        description: ""
+        title: title,
+        description: description
     })
 
     const onChangeHandler = (e) => {
@@ -23,16 +23,19 @@ export const AddNoteModal = ({closeModal, setNoteGroups}) => {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        const notes = await createNoteGroup(data)
-        setNoteGroups(notes)
+        
 
-        NotesNotifications.createNoteSuccess()
+
+        const notes = await editNote(_id, data)
+        await setNotes(notes)
+
+        NotesNotifications.editNoteSuccess();
         closeModal()
     }
 
     return (
         <div className={styles["container"]}>
-            <h1>Add Note</h1>
+            <h1>Edit note</h1>
 
             <form className={styles["content"]} onSubmit={submitHandler} >
                 <label>Title</label>

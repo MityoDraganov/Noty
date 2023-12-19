@@ -1,10 +1,10 @@
-import styles from "./Dashboard.module.css";
+import styles from "./NoteGroup.module.css";
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
 import { Note } from "./components/Note/Note";
 
-import { getAllNoteGroups } from "../../api/requests";
+import { getAllNotes } from "../../api/requests";
 
 //modals
 import { EditNoteModal } from "./components/EditNoteModal/EditNoteModal";
@@ -15,11 +15,11 @@ export const Dashboard = () => {
 
     const [editingNote, setEditingNote] = useState()
 
-    const [noteGroups, setNoteGroups] = useState([])
+    const [notes, setNotes] = useState([])
 
     useEffect(() => {
         (async () => {
-            setNoteGroups(await getAllNoteGroups());
+            setNotes(await getAllNotes());
         })();
     }, []);
 
@@ -35,12 +35,11 @@ export const Dashboard = () => {
         <div className={styles["container"]}>
 
             <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote) && styles["container-blur"]}`}>
-                <h1>Dashboard</h1>
-
+                <h1>Note Group</h1>
 
                 <div className={styles["notes-container"]}>
-                    {noteGroups.map((note) => (
-                        <Note key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote}/>
+                    {notes.map((note) => (
+                        <Note key={note.id} {...note} setNotes={setNotes} setEditingNote={setEditingNote}/>
                     ))}
                 </div>
             </div>
@@ -61,7 +60,7 @@ export const Dashboard = () => {
                         <Plus />
                     )}
                 </div>
-                {isAddNoteOpen && <AddNoteModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups}/>}
+                {isAddNoteOpen && <AddNoteModal closeModal={() => setIsAddNoteOpen(false)} setNotes={setNotes}/>}
                 {editingNote && <EditNoteModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes}/>}
             </div>
         </div>
