@@ -13,9 +13,11 @@ export const Note = ({ title, description, _id, setNotes, setEditingNote }) => {
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure that you want to delete that note?")) {
-            const result = await deleteNote(_id);
+            const deletedNote = await deleteNote(_id);
             NotesNotifications.deleteNoteSuccess();
-            setNotes(result);
+
+            // Update the state to remove the deleted note
+            setNotes((prevNotes) => prevNotes.filter((note) => note._id !== _id));
         }
     };
 

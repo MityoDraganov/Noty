@@ -26,8 +26,11 @@ export const EditNoteModal = ({closeModal, setNotes, title, description, _id}) =
         
 
 
-        const notes = await editNote(_id, data)
-        await setNotes(notes)
+        const updatedNote = await editNote(_id, data);
+        
+        setNotes((prevNotes) =>
+        prevNotes.map((note) => (note._id === _id ? updatedNote : note))
+        );
 
         NotesNotifications.editNoteSuccess();
         closeModal()
