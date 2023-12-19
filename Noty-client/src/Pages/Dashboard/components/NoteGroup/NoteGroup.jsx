@@ -1,5 +1,6 @@
-import styles from "./Note.module.css"
+import styles from "./NoteGroup.module.css"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { MoreHorizontal } from "lucide-react"
 import { deleteNote } from "../../../../api/requests"
@@ -8,7 +9,10 @@ import { NotesNotifications } from "../../../../utilities/Notifications"
 
 
 
-export const Note = ({ title, description, _id, setNoteGroups, setEditingNote }) => {
+export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNote }) => {
+
+    const navigate = useNavigate()
+
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const handleDelete = async () => {
@@ -24,14 +28,11 @@ export const Note = ({ title, description, _id, setNoteGroups, setEditingNote })
         setIsOptionsOpen(false);
     };
 
-    const handleTextAreaChange = (e) => {
-        setEditingNote((prevNote) => ({ ...prevNote, description: e.target.value }));
-    };
+    
 
     return (
-        <div className={styles["container"]}>
+        <div className={styles["container"]} onClick={() => navigate(`/dashboard/${_id}`)}>
             <h1>{title}</h1>
-            <textarea readOnly={true} value={description} onChange={handleTextAreaChange} />
 
             <div className={styles["actions-container"]}>
                 <div onClick={() => setIsOptionsOpen(!isOptionsOpen)}>

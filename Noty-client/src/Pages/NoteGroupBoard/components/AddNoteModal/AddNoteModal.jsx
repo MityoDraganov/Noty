@@ -9,7 +9,11 @@ import { createNote } from "../../../../api/requests"
 
 import { NotesNotifications } from "../../../../utilities/Notifications"
 
+import {useParams} from "react-router-dom"
+
 export const AddNoteModal = ({closeModal, setNotes}) => {
+
+    const {groupId} = useParams()
 
     const [data, setData] = useState({
         title: "",
@@ -23,7 +27,7 @@ export const AddNoteModal = ({closeModal, setNotes}) => {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        const notes = await createNote(data)
+        const notes = await createNote(groupId, data)
         setNotes(notes)
 
         NotesNotifications.createNoteSuccess()

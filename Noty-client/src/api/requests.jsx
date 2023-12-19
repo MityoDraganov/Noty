@@ -9,7 +9,7 @@ const endPoints = {
 
     //notes
     getAllNotes: (groupId) => `notes/${groupId}`,
-    createNote: "notes/create/test",
+    createNote: (groupId) => `notes/create/${groupId}`,
     editNote: (itemId) => `notes/edit/${itemId}`,
     deleteNote: (itemId) => `notes/${itemId}`,
     //noteDetails: (itemId) => `items/getItem/${itemId}`,
@@ -48,12 +48,12 @@ export const getAllNoteGroups = () => {
 
 
 //notes
-export const getAllNotes = () => {
-    return api.get(endPoints.getAllNotes)
+export const getAllNotes = (id) => {
+    return api.get(endPoints.getAllNotes(id))
 }
 
-export const createNote = (body) => {
-    return api.post(endPoints.createNote, body)
+export const createNote = (id, body) => {
+    return api.post(endPoints.createNote(id), body)
 }
 
 export const editNote = (id, body) => {

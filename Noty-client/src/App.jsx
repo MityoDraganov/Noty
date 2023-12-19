@@ -1,9 +1,14 @@
 import './App.css'
 import { Routes, Route, useLocation } from "react-router-dom"
 
-import { Home } from "./Pages/Home/Home"
-import { Dashboard } from './Pages/Dashboard/Dashboard'
 import { Navbar } from './components/NavBar/NavBar'
+
+import { Home } from "./Pages/Home/Home"
+
+import { Dashboard } from './Pages/Dashboard/Dashboard'
+import { NoteGroupBoard } from './Pages/NoteGroupBoard/NoteGroupBoard'
+
+
 
 //auth
 import { Register } from "./Pages/Auth/Register/Register"
@@ -20,9 +25,14 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard/:groupId" element={<NoteGroupBoard />} />
+
+                
             </Routes>
         </AuthProvider>
     )

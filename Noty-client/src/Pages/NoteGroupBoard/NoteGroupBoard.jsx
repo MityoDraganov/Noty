@@ -1,6 +1,8 @@
-import styles from "./NoteGroup.module.css";
+import styles from "./NoteGroupBoard.module.css";
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
+
+import { useParams } from "react-router-dom";
 
 import { Note } from "./components/Note/Note";
 
@@ -10,7 +12,8 @@ import { getAllNotes } from "../../api/requests";
 import { EditNoteModal } from "./components/EditNoteModal/EditNoteModal";
 import { AddNoteModal } from "./components/AddNoteModal/AddNoteModal";
 
-export const Dashboard = () => {
+export const NoteGroupBoard = () => {
+    const { groupId } = useParams()
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
 
     const [editingNote, setEditingNote] = useState()
@@ -19,7 +22,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         (async () => {
-            setNotes(await getAllNotes());
+            setNotes(await getAllNotes(groupId));
         })();
     }, []);
 

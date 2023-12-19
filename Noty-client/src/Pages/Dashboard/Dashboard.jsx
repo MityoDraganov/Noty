@@ -2,13 +2,13 @@ import styles from "./Dashboard.module.css";
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
-import { Note } from "./components/Note/Note";
+import { NoteGroup } from "./components/NoteGroup/NoteGroup";
 
 import { getAllNoteGroups } from "../../api/requests";
 
 //modals
-import { EditNoteModal } from "./components/EditNoteModal/EditNoteModal";
-import { AddNoteModal } from "./components/AddNoteModal/AddNoteModal";
+import { EditNoteGroupModal } from "./components/EditNoteGroupModal/EditNoteGroupModal";
+import { AddNoteGroupModal } from "./components/AddNoteGroupModal/AddNoteGroupModal";
 
 export const Dashboard = () => {
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
@@ -40,7 +40,7 @@ export const Dashboard = () => {
 
                 <div className={styles["notes-container"]}>
                     {noteGroups.map((note) => (
-                        <Note key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote}/>
+                        <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote}/>
                     ))}
                 </div>
             </div>
@@ -61,8 +61,8 @@ export const Dashboard = () => {
                         <Plus />
                     )}
                 </div>
-                {isAddNoteOpen && <AddNoteModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups}/>}
-                {editingNote && <EditNoteModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes}/>}
+                {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups}/>}
+                {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes}/>}
             </div>
         </div>
     );
