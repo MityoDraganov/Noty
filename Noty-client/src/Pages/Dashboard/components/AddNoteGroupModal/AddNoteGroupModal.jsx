@@ -13,7 +13,7 @@ export const AddNoteGroupModal = ({closeModal, setNoteGroups}) => {
 
     const [data, setData] = useState({
         title: "",
-        Visibility: ""
+        visibility: ""
     })
 
     const onChangeHandler = (e) => {
@@ -22,6 +22,11 @@ export const AddNoteGroupModal = ({closeModal, setNoteGroups}) => {
 
     const submitHandler = async (e) => {
         e.preventDefault()
+
+        if(!data.title || !data.visibility){
+            NotesNotifications.emptyFields();
+            return;
+        }
 
         const notes = await createNoteGroup(data)
         setNoteGroups(notes)
@@ -32,7 +37,7 @@ export const AddNoteGroupModal = ({closeModal, setNoteGroups}) => {
 
     return (
         <div className={styles["container"]}>
-            <h1>Add Note</h1>
+            <h1>Add Note Group</h1>
 
             <form className={styles["content"]} onSubmit={submitHandler} >
                 <label>Title</label>

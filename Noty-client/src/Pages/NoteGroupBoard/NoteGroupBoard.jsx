@@ -33,6 +33,7 @@ export const NoteGroupBoard = () => {
         }
         setIsAddNoteOpen((prevIsOpen) => !prevIsOpen);
     };
+    
 
     return (
         <div className={styles["container"]}>

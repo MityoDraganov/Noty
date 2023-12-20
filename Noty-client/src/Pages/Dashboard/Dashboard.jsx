@@ -31,6 +31,8 @@ export const Dashboard = () => {
         setIsAddNoteOpen((prevIsOpen) => !prevIsOpen);
     };
 
+    
+
     return (
         <div className={styles["container"]}>
 

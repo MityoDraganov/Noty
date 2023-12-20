@@ -23,7 +23,10 @@ export const EditNoteModal = ({closeModal, setNotes, title, description, _id}) =
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        
+        if(!data.title || !data.description){
+            NotesNotifications.emptyFields();
+            return;
+        }
 
 
         const updatedNote = await editNote(_id, data);

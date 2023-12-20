@@ -28,10 +28,22 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
         setIsOptionsOpen(false);
     };
 
-    
+    const handleContainerClick = (e) => {
+        if (e.target.closest(".options-container")) {
+            return;
+        }
+        else{
+            navigate(`/dashboard/${_id}`)
+
+        }
+
+    };
+
+
+
 
     return (
-        <div className={styles["container"]} onClick={() => navigate(`/dashboard/${_id}`)}>
+        <div className={styles["container"]} onClick={handleContainerClick}>
             <h1>{title}</h1>
 
             <div className={styles["actions-container"]}>

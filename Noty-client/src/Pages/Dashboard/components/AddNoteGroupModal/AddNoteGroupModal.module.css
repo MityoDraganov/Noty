@@ -36,15 +36,16 @@
     font-size: large;
 }
 
-.content textarea {
-    resize: none;
-    min-width: 80%;
-    min-height: 20vh;
-    padding: 3% 3%;
-    border-radius: 0.3em;
-    font-size: large;
+
+
+.content select{
+    padding: 2.5% 2%;
+    font-size: medium;
 }
 
+
 .btn-wrapper{
-    margin-top: 4%;
+    margin-top: 5%;
+
 }
+

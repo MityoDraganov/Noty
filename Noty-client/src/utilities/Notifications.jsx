@@ -33,7 +33,7 @@ const defaultNotification = (message) => {
         });
 }
 
-const errorNotification = (message) => {
+export const errorNotification = (message) => {
     toast.error(message , {
         position: "top-right",
         autoClose: 5000,

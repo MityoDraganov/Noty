@@ -7,7 +7,7 @@ import { BaseButton } from "../../../../components/BaseButton/BaseButton"
 
 import { createNote } from "../../../../api/requests"
 
-import { NotesNotifications } from "../../../../utilities/Notifications"
+import { errorNotification, NotesNotifications } from "../../../../utilities/Notifications"
 
 import {useParams} from "react-router-dom"
 
@@ -26,6 +26,11 @@ export const AddNoteModal = ({closeModal, setNotes}) => {
 
     const submitHandler = async (e) => {
         e.preventDefault()
+
+        if(!data.title || !data.description){
+            NotesNotifications.emptyFields();
+            return;
+        }
 
         const notes = await createNote(groupId, data)
         setNotes(notes)

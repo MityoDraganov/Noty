@@ -9,11 +9,11 @@ import { editNote } from "../../../../api/requests"
 
 import {NotesNotifications} from "../../../../utilities/Notifications"
 
-export const EditNoteGroupModal = ({closeModal, setNotes, title, description, _id}) => {
+export const EditNoteGroupModal = ({closeModal, setNotes, title, visibility, _id}) => {
 
     const [data, setData] = useState({
         title: title,
-        description: description
+        visibility: visibility
     })
 
     const onChangeHandler = (e) => {
@@ -23,7 +23,10 @@ export const EditNoteGroupModal = ({closeModal, setNotes, title, description, _i
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        
+        if(!data.title || !data.description){
+            NotesNotifications.emptyFields();
+            return;
+        }        
 
 
         const notes = await editNote(_id, data)

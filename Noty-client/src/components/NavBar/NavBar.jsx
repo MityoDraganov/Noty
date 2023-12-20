@@ -65,13 +65,13 @@ export const Navbar = () => {
                                 <Link to="/profile" onClick={closeNavigation}>
                                     Profile
                                 </Link>
-                                <a onClick={logoutHandler}>
+                                <a onClick={logoutHandler} onClick={closeNavigation}>
                                     Logout
                                 </a>
                             </>
                         ) : (
                             <>
-                                <Link to="/register" >
+                                <Link to="/register" onClick={closeNavigation}>
                                     Sign up
                                 </Link>
                             </>

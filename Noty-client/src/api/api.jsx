@@ -1,4 +1,5 @@
 import { clearAuth, readData } from "../utilities/AuthStateController";
+import { errorNotification } from "../utilities/Notifications";
 
 const host = process.env.NODE_ENV === 'development' ? "http://localhost:3030/" : "https://noty-server.vercel.app/"
 
@@ -38,6 +39,7 @@ const request = async (method, url, data) => {
         }
         return data;
     } catch (error) {
+        errorNotification(error.message)
         throw new Error(error.message);
     }
 };
