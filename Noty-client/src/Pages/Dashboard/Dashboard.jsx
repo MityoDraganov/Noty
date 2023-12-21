@@ -1,5 +1,5 @@
 import styles from "./Dashboard.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Plus } from "lucide-react";
 
 import { NoteGroup } from "./components/NoteGroup/NoteGroup";
@@ -10,12 +10,23 @@ import { getAllNoteGroups } from "../../api/requests";
 import { EditNoteGroupModal } from "./components/EditNoteGroupModal/EditNoteGroupModal";
 import { AddNoteGroupModal } from "./components/AddNoteGroupModal/AddNoteGroupModal";
 
-export const Dashboard = () => {
-    const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
+//contexts
+import { AuthContext } from "../../contexts/AuthContext";
+import { AuthorizationModal } from "../../components/AuthorizationModal/AuthorizationModal";
 
-    const [editingNote, setEditingNote] = useState()
+
+export const Dashboard = () => {
+
+    const { isAuthenticated } = useContext(AuthContext)
+
 
     const [noteGroups, setNoteGroups] = useState([])
+
+    //modal states
+    const [authorizationModal, setAuthorizationModal] = useState(!isAuthenticated)
+    const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
+    const [editingNote, setEditingNote] = useState()
+
 
     useEffect(() => {
         (async () => {
@@ -24,27 +35,28 @@ export const Dashboard = () => {
     }, []);
 
     const handleToggleAddNote = () => {
-        if(editingNote){
+        if (editingNote) {
             setEditingNote(null)
             return;
         }
         setIsAddNoteOpen((prevIsOpen) => !prevIsOpen);
     };
 
-    
+
 
     return (
         <div className={styles["container"]}>
 
-            <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote) && styles["container-blur"]}`}>
+            <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote || authorizationModal) && styles["container-blur"]}`}>
                 <h1>Dashboard</h1>
 
-
-                <div className={styles["notes-container"]}>
-                    {noteGroups.map((note) => (
-                        <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote}/>
-                    ))}
-                </div>
+                {!authorizationModal &&
+                    <div className={styles["notes-container"]}>
+                        {noteGroups.map((note) => (
+                            <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote} />
+                        ))}
+                    </div>
+                }
             </div>
 
             <div className={styles["modal-container"]}>
@@ -63,8 +75,9 @@ export const Dashboard = () => {
                         <Plus />
                     )}
                 </div>
-                {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups}/>}
-                {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes}/>}
+                {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups} />}
+                {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes} />}
+                {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal}/>}
             </div>
         </div>
     );

@@ -9,21 +9,21 @@ import { createNoteGroup } from "../../../../api/requests"
 
 import { NotesNotifications } from "../../../../utilities/Notifications"
 
-export const AddNoteGroupModal = ({closeModal, setNoteGroups}) => {
+export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
 
     const [data, setData] = useState({
         title: "",
-        visibility: ""
+        visibility: "private"
     })
 
     const onChangeHandler = (e) => {
-        setData((prevState) => ({...prevState, [e.target.name]: e.target.value }));
-      };
+        setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        if(!data.title || !data.visibility){
+        if (!data.title || !data.visibility) {
             NotesNotifications.emptyFields();
             return;
         }
@@ -42,11 +42,11 @@ export const AddNoteGroupModal = ({closeModal, setNoteGroups}) => {
             <form className={styles["content"]} onSubmit={submitHandler} >
                 <label>Title</label>
                 <div className={styles["input-wrapper"]}>
-                    <BaseInput  name="title" onChange={onChangeHandler} value={data.title}/>
+                    <BaseInput name="title" onChange={onChangeHandler} value={data.title} />
                 </div>
 
                 <label>Visibility</label>
-                <select name="visibility" onChange={onChangeHandler} value={data.description}>
+                <select name="visibility" onChange={onChangeHandler} value={data.visibility}>
                     <option value="private">Private</option>
                     <option value="public">Public</option>
                 </select>

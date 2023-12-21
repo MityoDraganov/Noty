@@ -17,7 +17,7 @@ const request = async (method, url, data) => {
 
     try{
     if(readData()){
-        const authData = JSON.parse(localStorage.moms_flowers_credentials);
+        const authData = JSON.parse(localStorage.auth);
         const userToken = authData["authorization-token"]
 
         if (userToken) {
@@ -30,16 +30,18 @@ const request = async (method, url, data) => {
 
     try {
         const res = await fetch(host + url, options);
+        const data = await res.json();
         if (!res.ok) {
+            
             throw new Error(data.Message);
         }
-        const data = await res.json();
         if (res.status === 401) {
             clearAuth()
         }
         return data;
     } catch (error) {
-        errorNotification(error.message)
+
+        errorNotification(error.toString())
         throw new Error(error.message);
     }
 };
