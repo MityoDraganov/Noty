@@ -25,8 +25,8 @@ export const Navbar = () => {
         if (confirm("Are you sure that you want to logout of your account?")) {
             clearAuth();
             setAccessData({
-                "authorization-token": "",
-                "_id": ""
+                "authorization-token": null,
+                "_id": null
             });
 
             // Close navigation after performing logout actions
@@ -65,7 +65,7 @@ export const Navbar = () => {
                                 <Link to="/profile" onClick={closeNavigation}>
                                     Profile
                                 </Link>
-                                <a onClick={logoutHandler} onClick={closeNavigation}>
+                                <a onClick={logoutHandler}>
                                     Logout
                                 </a>
                             </>

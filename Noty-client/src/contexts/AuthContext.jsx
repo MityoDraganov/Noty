@@ -5,8 +5,9 @@ export const AuthContext = createContext();
 export function AuthProvider(props) {
     
     const [accessData, setAccessData] = useState({
-        "authorization-token": "",
-        "_id": ""
+        "authorization-token": null,
+        "_id": null,
+        //"isGuest": true
 
     });
     useEffect(() => {

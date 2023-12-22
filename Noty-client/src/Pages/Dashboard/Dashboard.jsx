@@ -27,13 +27,15 @@ export const Dashboard = () => {
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
     const [editingNote, setEditingNote] = useState()
 
+    if (isAuthenticated) {
+        useEffect(() => {
+            (async () => {
+                setNoteGroups(await getAllNoteGroups());
+            })();
+        }, []);
 
-    useEffect(() => {
-        (async () => {
-            setNoteGroups(await getAllNoteGroups());
-        })();
-    }, []);
-
+    }
+    
     const handleToggleAddNote = () => {
         if (editingNote) {
             setEditingNote(null)
@@ -43,14 +45,13 @@ export const Dashboard = () => {
     };
 
 
-
     return (
         <div className={styles["container"]}>
 
             <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote || authorizationModal) && styles["container-blur"]}`}>
                 <h1>Dashboard</h1>
 
-                {!authorizationModal &&
+                {(!authorizationModal && isAuthenticated) &&
                     <div className={styles["notes-container"]}>
                         {noteGroups.map((note) => (
                             <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote} />
@@ -77,7 +78,7 @@ export const Dashboard = () => {
                 </div>
                 {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups} />}
                 {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes} />}
-                {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal}/>}
+                {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal} />}
             </div>
         </div>
     );

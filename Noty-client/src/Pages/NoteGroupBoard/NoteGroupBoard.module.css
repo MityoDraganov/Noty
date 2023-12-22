@@ -23,6 +23,7 @@
 
     .container-blur {
         filter: blur(5px);
+        pointer-events: none;
     }
 
     .add-item-wrapper {
@@ -40,4 +41,25 @@
 
     .add-item-wrapper svg {
         transition: ease 0.4s;
+    }
+
+    .search-wrapper{
+        margin-top: 2%;
+        width: 40%;
+        margin-left: 8%;
+        display: flex;
+        gap: 2%
+    }
+
+    .search-wrapper svg{
+        padding: 1%;
+        background-color: rgb(34, 193, 195);
+        border-radius: 25%;
+        cursor: pointer;
+        transition: ease-in-out 0.35s;
+    }
+
+    .search-wrapper svg:hover{
+        background-color: rgb(34, 123, 195);
+        transform: translateY(-8%);
     }

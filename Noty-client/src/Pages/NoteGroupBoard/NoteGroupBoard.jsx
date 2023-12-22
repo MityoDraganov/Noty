@@ -1,8 +1,8 @@
 import styles from "./NoteGroupBoard.module.css";
 import { useEffect, useState } from "react";
-import { Plus } from "lucide-react";
-
 import { useParams } from "react-router-dom";
+
+import { Plus, Search } from "lucide-react";
 
 import { Note } from "./components/Note/Note";
 
@@ -11,6 +11,9 @@ import { getAllNotes } from "../../api/requests";
 //modals
 import { EditNoteModal } from "./components/EditNoteModal/EditNoteModal";
 import { AddNoteModal } from "./components/AddNoteModal/AddNoteModal";
+
+import { BaseInput } from "../../components/BaseInput/BaseInput";
+
 
 export const NoteGroupBoard = () => {
     const { groupId } = useParams()
@@ -40,6 +43,14 @@ export const NoteGroupBoard = () => {
 
             <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote) && styles["container-blur"]}`}>
                 <h1>Note Group</h1>
+
+                <label>Search</label>
+                <div className={styles["search-wrapper"]}>
+                    <BaseInput placeHolder="Search..."/>
+                    <Search />
+                </div>
+                
+                
 
                 <div className={styles["notes-container"]}>
                     {notes.map((note) => (

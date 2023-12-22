@@ -15,7 +15,7 @@ import { setAuth } from "../../../utilities/AuthStateController"
 
 export const Register = () => {
 
-    const {setAccessData} = useContext(AuthContext)
+    const { setAccessData } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const [credentials, setCredentials] = useState({
@@ -49,10 +49,11 @@ export const Register = () => {
 
 
         const result = await userRegister(credentials)
-        
+
+        //setAccessData({...result, "isGuest": false})
         setAccessData(result)
         setAuth(result)
-    
+
         AuthNotifications.successAuth();
 
         navigate("/")

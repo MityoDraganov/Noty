@@ -42,6 +42,7 @@ export const Login = () => {
         }
         const result = await userLogin(credentials)
         
+        //setAccessData({...result, "isGuest": false})
         setAccessData(result)
         setAuth(result)
         
