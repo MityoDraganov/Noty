@@ -27,15 +27,15 @@ export const Dashboard = () => {
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
     const [editingNote, setEditingNote] = useState()
 
-    if (isAuthenticated) {
-        useEffect(() => {
+    useEffect(() => {
+        if (isAuthenticated) {
             (async () => {
                 setNoteGroups(await getAllNoteGroups());
             })();
-        }, []);
+        }
+    }, []);
 
-    }
-    
+
     const handleToggleAddNote = () => {
         if (editingNote) {
             setEditingNote(null)
@@ -77,7 +77,7 @@ export const Dashboard = () => {
                     )}
                 </div>
                 {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups} />}
-                {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNotes={setNotes} />}
+                {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNoteGroups={setNoteGroups} />}
                 {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal} />}
             </div>
         </div>

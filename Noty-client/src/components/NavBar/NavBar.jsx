@@ -53,18 +53,9 @@ export const Navbar = () => {
                         <Link to="/dashboard" onClick={closeNavigation}>
                             Dashboard
                         </Link>
-                        <Link to="/about" onClick={closeNavigation}>
-                            About
-                        </Link>
-                        <Link to="/contact" onClick={closeNavigation}>
-                            Contact
-                        </Link>
 
                         {isAuthenticated ? (
                             <>
-                                <Link to="/profile" onClick={closeNavigation}>
-                                    Profile
-                                </Link>
                                 <a onClick={logoutHandler}>
                                     Logout
                                 </a>

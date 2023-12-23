@@ -7,7 +7,7 @@ import { BaseButton } from "../../../../components/BaseButton/BaseButton"
 
 import { createNoteGroup } from "../../../../api/requests"
 
-import { NotesNotifications } from "../../../../utilities/Notifications"
+import { NoteGroupsNotifications } from "../../../../utilities/Notifications"
 
 export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
 
@@ -31,7 +31,7 @@ export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
         const notes = await createNoteGroup(data)
         setNoteGroups(notes)
 
-        NotesNotifications.createNoteSuccess()
+        NoteGroupsNotifications.createNoteGroupSuccess()
         closeModal()
     }
 

@@ -6,6 +6,10 @@ const endPoints = {
     //noteGroups
     createNoteGroup: "noteGroups/create",
     getNoteGroups: "noteGroups",
+    editNoteGroup: (noteGroupId) => `noteGroups/edit/${noteGroupId}`,
+    addUserToGroup: (noteGroupId) => `noteGroups/addUser/${noteGroupId}`,
+    deleteUserFromGroup: (noteGroupId) => `noteGroups/deleteUser/${noteGroupId}`,
+
 
     //notes
     getAllNotes: (groupId) => `notes/${groupId}`,
@@ -45,6 +49,17 @@ export const getAllNoteGroups = () => {
     return api.get(endPoints.getNoteGroups)
 }
 
+export const editNoteGroup = (body) => {
+    return api.post(endPoints.editNoteGroup, body)
+}
+
+export const addUserToGroup = (body) => {
+    return api.post(endPoints.addUserToGroup, body)
+}
+
+export const deleteUserFromGroup = (body) => {
+    return api.post(endPoints.deleteUserFromGroup, body)
+}
 
 
 //notes

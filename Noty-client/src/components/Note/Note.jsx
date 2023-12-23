@@ -1,22 +1,29 @@
 import styles from "./Note.module.css"
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 import { MoreHorizontal } from "lucide-react"
-import { deleteNote } from "../../../../api/requests"
+import { deleteNote } from "../../api/requests.jsx"
 
-import { NotesNotifications } from "../../../../utilities/Notifications"
+import { NotesNotifications } from "../../utilities/Notifications.jsx"
 
+import { AuthContext } from "../../contexts/AuthContext"
 
 
 export const Note = ({ title, description, _id, setNotes, setEditingNote }) => {
+
+    const { isAuthenticated } = useContext(AuthContext)
+
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure that you want to delete that note?")) {
-            const deletedNote = await deleteNote(_id);
+
+            if (isAuthenticated) {
+                await deleteNote(_id);
+            }
             NotesNotifications.deleteNoteSuccess();
 
-            // Update the state to remove the deleted note
+
             setNotes((prevNotes) => prevNotes.filter((note) => note._id !== _id));
         }
     };

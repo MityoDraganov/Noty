@@ -1,0 +1,65 @@
+.container {
+    user-select: none;
+    height: 100vh;        
+}
+
+.content-container {
+    height: 100%;
+    transition: filter 0.4s ease;
+}
+
+.notes-container {
+    top: 10%; /* Adjust this value as needed */
+    height: 80%; /* Adjust this value as needed */
+    width: 85%;
+    margin: 2% auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4%;
+    padding-bottom: 15%;
+
+}
+
+.container-blur {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.add-item-wrapper {
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    background: rgb(34,193,195);
+    width: 8vh;
+    height: 8vh;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-item-wrapper svg {
+    transition: ease 0.4s;
+}
+
+.search-wrapper{
+    margin-top: 2%;
+    width: 40%;
+    margin-left: 8%;
+    display: flex;
+    gap: 2%
+}
+
+.search-wrapper svg{
+    padding: 1%;
+    background-color: rgb(34, 193, 195);
+    border-radius: 25%;
+    cursor: pointer;
+    transition: ease-in-out 0.35s;
+}
+
+.search-wrapper svg:hover{
+    background-color: rgb(34, 123, 195);
+    transform: translateY(-8%);
+}

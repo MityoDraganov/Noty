@@ -18,6 +18,14 @@ export const NotesNotifications = {
     editNoteSuccess: () => successNotification("Note successfuly edited!")
 }
 
+export const NoteGroupsNotifications = {
+    emptyFields: () => errorNotification("All form fields are required!"),
+
+    createNoteGroupSuccess: () => successNotification("Note group successfuly created!"),
+    deleteNoteGroupSuccess: () => successNotification("Note group successfuly deleted!"),
+    editNoteGroupSuccess: () => successNotification("Note group successfuly edited!")
+}
+
 
 
 const defaultNotification = (message) => {

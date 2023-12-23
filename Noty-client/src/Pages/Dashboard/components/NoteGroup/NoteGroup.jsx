@@ -10,16 +10,20 @@ import { NotesNotifications } from "../../../../utilities/Notifications"
 
 
 export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNote }) => {
-
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+    const handleOptionsClick = (e) => {
+        // Stop the event from propagating to the parent div (container)
+        e.stopPropagation();
+        setIsOptionsOpen(!isOptionsOpen);
+    };
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure that you want to delete that note?")) {
-            const result = await deleteNote(_id);
+            const noteGroup = await deleteNote(_id);
+            setNoteGroups((prevNoteGroups) => prevNoteGroups.filter((note) => note._id !== _id))
             NotesNotifications.deleteNoteSuccess();
-            setNoteGroups(result);
         }
     };
 
@@ -28,30 +32,16 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
         setIsOptionsOpen(false);
     };
 
-    const handleContainerClick = (e) => {
-        if (e.target.closest(".options-container")) {
-            return;
-        }
-        else{
-            navigate(`/dashboard/${_id}`)
-
-        }
-
-    };
-
-
-
-
     return (
-        <div className={styles["container"]} onClick={handleContainerClick}>
-            <h1>{title}</h1>
-
-            <div className={styles["actions-container"]}>
-                <div onClick={() => setIsOptionsOpen(!isOptionsOpen)}>
-                    <MoreHorizontal />
+        <div className={styles["container"]}>
+            <div className={styles["content"]} onClick={() => navigate(`/dashboard/${_id}`)}>
+                <h1>{title}</h1>
+                <div className={styles["actions-container"]}>
+                    <div onClick={handleOptionsClick}>
+                        <MoreHorizontal />
+                    </div>
                 </div>
             </div>
-
             {isOptionsOpen && (
                 <div className={styles["options-container"]}>
                     <ul>
@@ -63,3 +53,4 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
         </div>
     );
 };
+

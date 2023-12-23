@@ -14,6 +14,7 @@ import { NoteGroupBoard } from './Pages/NoteGroupBoard/NoteGroupBoard'
 import { Register } from "./Pages/Auth/Register/Register"
 import { Login } from "./Pages/Auth/Login/Login"
 import { AuthProvider } from './contexts/AuthContext'
+import { GuestNotesBoard } from './Pages/GuestNotesBoard/GuestNotesBoard'
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/:groupId" element={<NoteGroupBoard />} />
 
+                <Route path="/guestNotesBoard" element={<GuestNotesBoard />} />
+                
                 
             </Routes>
         </AuthProvider>

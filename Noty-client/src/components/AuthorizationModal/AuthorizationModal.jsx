@@ -11,7 +11,7 @@ export const AuthorizationModal = ({setAuthorizationModal}) => {
     }
 
     const guestHandler = () => {
-
+        navigate("/guestNotesBoard")
         setAuthorizationModal(false)
     }
 
