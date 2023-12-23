@@ -20,7 +20,7 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
     };
 
     const handleDelete = async () => {
-        if (window.confirm("Are you sure that you want to delete that note?")) {
+        if (window.confirm("Are you sure that you want to delete that note group?")) {
             const noteGroup = await deleteNote(_id);
             setNoteGroups((prevNoteGroups) => prevNoteGroups.filter((note) => note._id !== _id))
             NotesNotifications.deleteNoteSuccess();

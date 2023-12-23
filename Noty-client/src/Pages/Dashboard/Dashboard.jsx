@@ -23,7 +23,7 @@ export const Dashboard = () => {
     const [noteGroups, setNoteGroups] = useState([])
 
     //modal states
-    const [authorizationModal, setAuthorizationModal] = useState(!isAuthenticated)
+    const [authorizationModal, setAuthorizationModal] = useState(true)
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
     const [editingNote, setEditingNote] = useState()
 
@@ -32,8 +32,11 @@ export const Dashboard = () => {
             (async () => {
                 setNoteGroups(await getAllNoteGroups());
             })();
+            setAuthorizationModal(false);
+        } else {
+            setAuthorizationModal(true);
         }
-    }, []);
+    }, [isAuthenticated]); 
 
 
     const handleToggleAddNote = () => {
