@@ -11,35 +11,14 @@
     border-radius: 0.4rem;
 }
 
-.content{
-    margin: 0 auto;
-    width: 60%;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.content label {
-    font-weight: bold;
-    font-size: x-large;
-}
-
-.input-wrapper{
-    width: 60%;
-    margin-bottom: 5%;
-    border-radius: 0.3em;
-}
-
-.input-wrapper input{
-    padding: 3% 3%;
-    font-size: large;
+.add-item-wrapper svg {
+    transition: ease 0.4s;
 }
 
 .search-wrapper{
     margin-top: 2%;
-    width: 70%;
-    margin-left: 2%;
+    width: 40%;
+    margin-left: 8%;
     display: flex;
     gap: 2%
 }
@@ -55,8 +34,4 @@
 .search-wrapper svg:hover{
     background-color: rgb(34, 123, 195);
     transform: translateY(-8%);
-}
-
-.btn-wrapper{
-    margin-top: 4%;
 }

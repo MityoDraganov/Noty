@@ -21,7 +21,8 @@ const endPoints = {
     //users
     usersRegister: "users/register",
     usersLogin: "users/login",
-    userProfile: "users/profile",    
+    userProfile: "users/profile",
+    usersSearch: "users/search",
 }
 
 
@@ -35,8 +36,12 @@ export const userLogin = (body) => {
     return api.post(endPoints.usersLogin, body)
 }
 
-export const userProfile = () => {
-    return api.get(endPoints.userProfile)
+// export const userProfile = () => {
+//     return api.get(endPoints.userProfile)
+// }
+
+export const usersSearch = (body) => {
+    return api.post(endPoints.usersSearch, body)
 }
 
 

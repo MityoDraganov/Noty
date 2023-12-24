@@ -32,6 +32,10 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
         setIsOptionsOpen(false);
     };
 
+    const handleManageAccess = () => {
+
+    }
+
     return (
         <div className={styles["container"]}>
             <div className={styles["content"]} onClick={() => navigate(`/dashboard/${_id}`)}>
@@ -46,6 +50,7 @@ export const NoteGroup = ({ title, description, _id, setNoteGroups, setEditingNo
                 <div className={styles["options-container"]}>
                     <ul>
                         <li onClick={handleEdit}>Edit</li>
+                        <li onClick={handleManageAccess}>Manage access</li>
                         <li onClick={handleDelete}>Delete</li>
                     </ul>
                 </div>
