@@ -1,6 +1,7 @@
 import styles from "./Profile.module.css"
 import { useEffect, useState } from "react"
 import { userProfile } from "../../api/requests"
+import { Invite } from "./components/Invite"
 
 export const Profile = () => {
 
@@ -24,16 +25,19 @@ export const Profile = () => {
         })()
     }, [])
 
-    return(
+    return (
         <div className={styles["container"]}>
             <h1>Profile Page</h1>
 
             <div>
                 <h2>Inbox</h2>
                 <div>
-                    {profileData.notifications.map(notification => (
-                        <p>{notification.sentBy.username} sent you an invite</p>
-                    )
+                    {profileData.notifications ? (
+                        profileData.notifications.map((notification, index) => (
+                           <Invite index={index} notification={notification}/>
+                        ))
+                    ) : (
+                        <h2>No notifications yet!</h2>
                     )}
                 </div>
             </div>

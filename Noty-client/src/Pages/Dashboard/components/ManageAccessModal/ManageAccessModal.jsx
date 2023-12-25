@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { usersSearch } from "../../../../api/requests";
 import { BaseInput } from "../../../../components/BaseInput/BaseInput";
 import { Invite } from "../Invite/Invite";
-import { errorNotification } from "../../../../utilities/Notifications";
+import { errorNotification, inviteNotifications } from "../../../../utilities/Notifications";
 
 
 export const ManageAccessModal = ({ closeModal, _id }) => {
@@ -28,10 +28,11 @@ export const ManageAccessModal = ({ closeModal, _id }) => {
 
     const handleAddUser = async (_userId) => {
         const result = await sendInvite(_userId, _id)
+        inviteNotifications.inviteSent()
     }
 
     const handleRemoveUser = async () => {
-
+        inviteNotifications.inviteSent()
     }
 
     return (
@@ -47,7 +48,7 @@ export const ManageAccessModal = ({ closeModal, _id }) => {
                 </div>
 
                 <div className={styles["search-results"]}>
-                            {searchedUsers && searchedUsers.map(user =>  <Invite username={user.username}/>)}
+                            {searchedUsers && searchedUsers.map(user =>  <Invite username={user.username} handleAddUser={handleAddUser}/>)}
                 </div>
 
             </div>

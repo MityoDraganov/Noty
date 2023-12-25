@@ -26,6 +26,13 @@ export const NoteGroupsNotifications = {
     editNoteGroupSuccess: () => successNotification("Note group successfuly edited!")
 }
 
+export const inviteNotifications = {
+    inviteSent: () => errorNotification("Invite successfuly sent!"),
+    removeSent: () => errorNotification("User removed useccesfully!"),
+    inviteRejected: () => errorNotification("Invite rejected!"),
+    inviteAccepted: () => errorNotification("Invite accepted!"),
+}
+
 
 
 const defaultNotification = (message) => {
