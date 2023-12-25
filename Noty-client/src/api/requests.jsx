@@ -23,6 +23,11 @@ const endPoints = {
     usersLogin: "users/login",
     userProfile: "users/profile",
     usersSearch: "users/search",
+
+    //notifications
+    sendInvite: "/notifications/invite/create",
+    acceptInvite: "/notifications/invite/accept",
+    rejectInvite: "/notifications/invite/reject",
 }
 
 
@@ -36,12 +41,26 @@ export const userLogin = (body) => {
     return api.post(endPoints.usersLogin, body)
 }
 
-// export const userProfile = () => {
-//     return api.get(endPoints.userProfile)
-// }
+export const userProfile = () => {
+   return api.get(endPoints.userProfile)
+}
 
 export const usersSearch = (body) => {
     return api.post(endPoints.usersSearch, body)
+}
+
+//notifications
+
+export const sendInvite = (body) => {
+    return api.post(endPoints.sendInvite, body)
+}
+
+export const acceptInvite = (body) => {
+    return api.post(endPoints.acceptInvite, body)
+}
+
+export const rejectInvite = (body) => {
+    return api.post(endPoints.rejectInvite, body)
 }
 
 
@@ -54,13 +73,11 @@ export const getAllNoteGroups = () => {
     return api.get(endPoints.getNoteGroups)
 }
 
-export const editNoteGroup = (body) => {
-    return api.post(endPoints.editNoteGroup, body)
+export const editNoteGroup = (_id, body) => {
+    return api.post(endPoints.editNoteGroup(_id), body)
 }
 
-export const addUserToGroup = (body) => {
-    return api.post(endPoints.addUserToGroup, body)
-}
+
 
 export const deleteUserFromGroup = (body) => {
     return api.post(endPoints.deleteUserFromGroup, body)
@@ -85,10 +102,3 @@ export const deleteNote = (id) => {
 }
 
 
-// export const getNoteById = (id, body) => {
-//     return api.get(endPoints.createItem, body)
-// }
-
-// export const getItemDetails = (id) => {
-//     return api.get(endPoints.adminItem(id))
-// }

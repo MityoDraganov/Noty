@@ -5,11 +5,10 @@ import { useState } from "react"
 import { BaseInput } from "../../../../components/BaseInput/BaseInput"
 import { BaseButton } from "../../../../components/BaseButton/BaseButton"
 
-import { editNoteGroup, usersSearch } from "../../../../api/requests"
+import { editNoteGroup } from "../../../../api/requests"
 
 import { NotesNotifications } from "../../../../utilities/Notifications"
 
-import { Search } from "lucide-react";
 
 export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibility, _id }) => {
 
@@ -17,19 +16,7 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
         title: title,
         visibility: visibility
     })
-
-    const [searchValue, setSearchValue] = useState("");
-    const [searchedUsers, setSearchedUsers] = useState([]);
-
     
-    const handleSearchChange = (e) => {
-        setSearchValue(e.target.value);
-    };
-
-    const searchSubmit = async () => {
-        const users = await usersSearch({"username": searchValue})
-        setSearchedUsers(users);
-    };
 
     const onChangeHandler = (e) => {
         setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -55,6 +42,8 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
         closeModal()
     }
 
+
+
     return (
         <div className={styles["container"]}>
             <h1>Edit Note Group</h1>
@@ -71,18 +60,6 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
                     <option value="public">Public</option>
                 </select>
 
-                {data.visibility === "private"  &&
-                    <div>
-                        <h1>Manage access to group</h1>
-                        <div className={styles["search-wrapper"]}>
-                            <BaseInput placeHolder="Search..." value={searchValue} onChange={handleSearchChange} />
-                            <Search onClick={searchSubmit} />
-                            <ul>
-                                {searchedUsers && searchedUsers.map(user => <li>{user.username}</li>)}
-                            </ul>
-                        </div>
-                    </div>
-                }
 
                 <div className={styles["btn-wrapper"]}>
                     <BaseButton type="submit" buttonLabel="Submit" />

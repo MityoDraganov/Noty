@@ -1,0 +1,10 @@
+.container{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contaienr svg{
+    padding: 10%;
+}

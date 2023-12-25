@@ -13,6 +13,7 @@ import { AddNoteGroupModal } from "./components/AddNoteGroupModal/AddNoteGroupMo
 //contexts
 import { AuthContext } from "../../contexts/AuthContext";
 import { AuthorizationModal } from "../../components/AuthorizationModal/AuthorizationModal";
+import { ManageAccessModal } from "./components/ManageAccessModal/ManageAccessModal";
 
 
 export const Dashboard = () => {
@@ -26,6 +27,7 @@ export const Dashboard = () => {
     const [authorizationModal, setAuthorizationModal] = useState(true)
     const [isAddNoteOpen, setIsAddNoteOpen] = useState(false);
     const [editingNote, setEditingNote] = useState()
+    const [managingAccess, setManagingAccess] = useState()
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -40,8 +42,9 @@ export const Dashboard = () => {
 
 
     const handleToggleAddNote = () => {
-        if (editingNote) {
+        if (editingNote || managingAccess) {
             setEditingNote(null)
+            setManagingAccess(null)
             return;
         }
         setIsAddNoteOpen((prevIsOpen) => !prevIsOpen);
@@ -51,13 +54,13 @@ export const Dashboard = () => {
     return (
         <div className={styles["container"]}>
 
-            <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote || authorizationModal) && styles["container-blur"]}`}>
+            <div className={`${styles["content-container"]} ${(isAddNoteOpen || editingNote || managingAccess || authorizationModal) && styles["container-blur"]}`}>
                 <h1>Dashboard</h1>
 
                 {(!authorizationModal && isAuthenticated) &&
                     <div className={styles["notes-container"]}>
                         {noteGroups.map((note) => (
-                            <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote} />
+                            <NoteGroup key={note.id} {...note} setNoteGroups={setNoteGroups} setEditingNote={setEditingNote} setManagingAccess={setManagingAccess}/>
                         ))}
                     </div>
                 }
@@ -68,12 +71,12 @@ export const Dashboard = () => {
                     className={styles["add-item-wrapper"]}
                     onClick={handleToggleAddNote}
                     style={{
-                        background: (isAddNoteOpen || editingNote)
+                        background: (isAddNoteOpen || editingNote || managingAccess)
                             ? "radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)"
                             : "rgb(34,193,195)",
                     }}
                 >
-                    {(isAddNoteOpen || editingNote) ? (
+                    {(isAddNoteOpen || editingNote || managingAccess) ? (
                         <Plus style={{ transform: "rotate(45deg)" }} />
                     ) : (
                         <Plus />
@@ -81,6 +84,7 @@ export const Dashboard = () => {
                 </div>
                 {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups} />}
                 {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNoteGroups={setNoteGroups} />}
+                {managingAccess && <ManageAccessModal _id={managingAccess._id} />}
                 {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal} />}
             </div>
         </div>

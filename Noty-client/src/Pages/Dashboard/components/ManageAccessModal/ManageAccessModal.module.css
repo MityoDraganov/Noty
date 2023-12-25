@@ -16,9 +16,22 @@
 }
 
 .search-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.search{
     margin-top: 2%;
     width: 40%;
     margin-left: 8%;
+    display: flex;
+    gap: 2%
+}
+
+.search{
+    margin-top: 2%;
+    width: 70%;
+    margin-left: 2%;
     display: flex;
     gap: 2%
 }
@@ -34,4 +47,8 @@
 .search-wrapper svg:hover{
     background-color: rgb(34, 123, 195);
     transform: translateY(-8%);
+}
+
+.search-results{
+    margin-left: 4%;
 }

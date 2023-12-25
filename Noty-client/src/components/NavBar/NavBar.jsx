@@ -31,7 +31,7 @@ export const Navbar = () => {
 
             // Close navigation after performing logout actions
             closeNavigation();
-            
+
             // Navigate to the login page
             navigate("/login");
         }
@@ -56,6 +56,9 @@ export const Navbar = () => {
 
                         {isAuthenticated ? (
                             <>
+                                <Link to="/profile" onClick={closeNavigation}>
+                                    Profile
+                                </Link>
                                 <a onClick={logoutHandler}>
                                     Logout
                                 </a>
