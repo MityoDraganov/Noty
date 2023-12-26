@@ -6,9 +6,11 @@ const endPoints = {
     //noteGroups
     createNoteGroup: "noteGroups/create",
     getNoteGroups: "noteGroups",
+    getPermitedNoteGroups: "noteGroups/permitedNoteGroups",
     editNoteGroup: (noteGroupId) => `noteGroups/edit/${noteGroupId}`,
     addUserToGroup: (noteGroupId) => `noteGroups/addUser/${noteGroupId}`,
     deleteUserFromGroup: (noteGroupId) => `noteGroups/deleteUser/${noteGroupId}`,
+    removeMyAccess: (noteGroupId) => `noteGroups/removeMyAccess/${noteGroupId}`,
 
 
     //notes
@@ -55,6 +57,10 @@ export const sendInvite = (body) => {
     return api.post(endPoints.sendInvite, body)
 }
 
+export const removeUser = (noteGroupId, body) => {
+    return api.post(endPoints.deleteUserFromGroup(noteGroupId), body)
+}
+
 export const acceptInvite = (body) => {
     return api.post(endPoints.acceptInvite, body)
 }
@@ -81,6 +87,14 @@ export const editNoteGroup = (_id, body) => {
 
 export const deleteUserFromGroup = (body) => {
     return api.post(endPoints.deleteUserFromGroup, body)
+}
+
+export const getPermitedNoteGroups = () => {
+    return api.get(endPoints.getPermitedNoteGroups)
+}
+
+export const removeMyAccess = (noteGroupId) => {
+    return api.post(endPoints.removeMyAccess(noteGroupId))
 }
 
 

@@ -1,7 +1,7 @@
 import styles from "./ManageAccessModal.module.css"
 import { useState } from "react";
 import { Search, X } from "lucide-react";
-import { sendInvite, usersSearch } from "../../../../api/requests";
+import { removeUser, sendInvite, usersSearch } from "../../../../api/requests";
 import { BaseInput } from "../../../../components/BaseInput/BaseInput";
 import { Invite } from "../Invite/Invite";
 import { errorNotification, inviteNotifications } from "../../../../utilities/Notifications";
@@ -32,8 +32,9 @@ export const ManageAccessModal = ({ _id, permitedUsers, owner }) => {
         inviteNotifications.inviteSent()
     }
 
-    const handleRemoveUser = async (_userId) => {
-        inviteNotifications.inviteSent()
+    const handleRemoveUser = async (userId) => {
+        const result = await removeUser(_id ,{userId: userId})
+        inviteNotifications.removeSent()
     }
 
     return (

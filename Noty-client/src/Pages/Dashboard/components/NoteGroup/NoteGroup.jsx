@@ -1,15 +1,20 @@
 import styles from "./NoteGroup.module.css"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { MoreHorizontal } from "lucide-react"
 import { deleteNote } from "../../../../api/requests"
 
 import { NotesNotifications } from "../../../../utilities/Notifications"
+import { AuthContext } from "../../../../contexts/AuthContext"
+
 
 
 
 export const NoteGroup = ({ title, description, _id, visibility, setNoteGroups, setEditingNote, setManagingAccess, permitedUsers, owner }) => {
+
+    const { accessData } = useContext(AuthContext)
+
     const navigate = useNavigate();
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
@@ -41,11 +46,13 @@ export const NoteGroup = ({ title, description, _id, visibility, setNoteGroups, 
         <div className={styles["container"]}>
             <div className={styles["content"]} onClick={() => navigate(`/dashboard/${_id}`)}>
                 <h1>{title}</h1>
-                <div className={styles["actions-container"]}>
-                    <div onClick={handleOptionsClick}>
-                        <MoreHorizontal />
+                {owner === accessData._id &&
+                    <div className={styles["actions-container"]}>
+                        <div onClick={handleOptionsClick}>
+                            <MoreHorizontal />
+                        </div>
                     </div>
-                </div>
+                }
             </div>
             {isOptionsOpen && (
                 <div className={styles["options-container"]}>

@@ -29,23 +29,30 @@ export const AddNoteModal = ({ closeModal, setNotes }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault()
+        try {
 
+            if (!data.title || !data.description) {
+                NotesNotifications.emptyFields();
+                return;
+            }
+            if (isAuthenticated) {
+                // Create the note and wait for the result
+                const newNote = await createNote(groupId, data);
 
-        if (!data.title || !data.description) {
-            NotesNotifications.emptyFields();
-            return;
+                // Update the state with the new note
+                setNotes((prevNotes) => [...prevNotes, newNote]);
+            } else {
+                // For unauthenticated users, directly use the input data
+                setNotes((prevNotes) => [...prevNotes, data]);
+            }
+
+            NotesNotifications.createNoteSuccess();
+            closeModal();
+        } catch (error) {
+            closeModal()
+            console.error("Error creating note:", error);
+            // Handle the error as needed (e.g., show an error notification)
         }
-
-        if (isAuthenticated) {
-            const newNote = await createNote(groupId, data)
-            setNotes((prevNotes) => [...prevNotes, newNote]);
-            NotesNotifications.createNoteSuccess()
-        } else {
-            setNotes((prevNotes) => [...prevNotes, data]);
-            NotesNotifications.createNoteSuccess()
-        }
-
-        closeModal()
     }
 
     return (

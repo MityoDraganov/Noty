@@ -23,7 +23,9 @@ export const NoteGroupsNotifications = {
 
     createNoteGroupSuccess: () => successNotification("Note group successfuly created!"),
     deleteNoteGroupSuccess: () => successNotification("Note group successfuly deleted!"),
-    editNoteGroupSuccess: () => successNotification("Note group successfuly edited!")
+    editNoteGroupSuccess: () => successNotification("Note group successfuly edited!"),
+
+    removeMyAccessSuccess: () => successNotification("Access removed successfuly!")
 }
 
 export const inviteNotifications = {

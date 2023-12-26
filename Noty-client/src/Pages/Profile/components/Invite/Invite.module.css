@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.actions-container{
+    display: flex;
+    align-items: center;
+    gap: 6%;
+}
+
+.actions-container div{
+    margin-top: 8%;
+}
