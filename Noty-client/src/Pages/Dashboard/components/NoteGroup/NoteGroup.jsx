@@ -9,7 +9,7 @@ import { NotesNotifications } from "../../../../utilities/Notifications"
 
 
 
-export const NoteGroup = ({ title, description, _id, visibility, setNoteGroups, setEditingNote, setManagingAccess }) => {
+export const NoteGroup = ({ title, description, _id, visibility, setNoteGroups, setEditingNote, setManagingAccess, permitedUsers, owner }) => {
     const navigate = useNavigate();
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export const NoteGroup = ({ title, description, _id, visibility, setNoteGroups, 
     };
 
     const handleManageAccess = () => {
-        setManagingAccess({ _id })
+        setManagingAccess({ _id, permitedUsers, owner })
         setIsOptionsOpen(false);
     }
 

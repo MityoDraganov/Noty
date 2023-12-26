@@ -7,7 +7,7 @@ export const Invite = ({ notification, index, acceptInvite, rejectInvite }) => {
     return (
         <div className={styles["container"]}>
             <p key={index}>{notification.sentBy.username} sent you an invite</p>
-            <div>
+            <div className={styles["actions-container"]}>
                 <div>
                     <BaseButton onClick={acceptInvite} buttonLabel={<Check />}/>
                 </div>

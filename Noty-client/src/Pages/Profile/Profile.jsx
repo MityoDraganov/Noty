@@ -15,13 +15,14 @@ export const Profile = () => {
             sentBy: {
             },
             addressedTo: {
-            }
+            },
+            notifications: []
         }]
     })
 
     useEffect(() => {
         (async () => {
-            setProfileData(await userProfile)
+            setProfileData(await userProfile())
         })()
     }, [])
 
@@ -31,7 +32,7 @@ export const Profile = () => {
 
             <div>
                 <h2>Inbox</h2>
-                <div>
+                <div className={styles["notifications-container"]}>
                     {profileData.notifications ? (
                         profileData.notifications.map((notification, index) => (
                            <Invite index={index} notification={notification}/>

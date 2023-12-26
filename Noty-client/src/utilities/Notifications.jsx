@@ -27,10 +27,10 @@ export const NoteGroupsNotifications = {
 }
 
 export const inviteNotifications = {
-    inviteSent: () => errorNotification("Invite successfuly sent!"),
-    removeSent: () => errorNotification("User removed useccesfully!"),
-    inviteRejected: () => errorNotification("Invite rejected!"),
-    inviteAccepted: () => errorNotification("Invite accepted!"),
+    inviteSent: () => successNotification("Invite successfuly sent!"),
+    removeSent: () => successNotification("User removed useccesfully!"),
+    inviteRejected: () => successNotification("Invite rejected!"),
+    inviteAccepted: () => successNotification("Invite accepted!"),
 }
 
 

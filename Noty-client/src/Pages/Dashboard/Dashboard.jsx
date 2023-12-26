@@ -84,7 +84,7 @@ export const Dashboard = () => {
                 </div>
                 {isAddNoteOpen && <AddNoteGroupModal closeModal={() => setIsAddNoteOpen(false)} setNoteGroups={setNoteGroups} />}
                 {editingNote && <EditNoteGroupModal {...editingNote} closeModal={() => setEditingNote(null)} setNoteGroups={setNoteGroups} />}
-                {managingAccess && <ManageAccessModal _id={managingAccess._id} />}
+                {managingAccess && <ManageAccessModal {...managingAccess} />}
                 {authorizationModal && <AuthorizationModal setAuthorizationModal={setAuthorizationModal} />}
             </div>
         </div>

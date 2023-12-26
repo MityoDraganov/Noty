@@ -1,13 +1,14 @@
 import styles from "./ManageAccessModal.module.css"
 import { useState } from "react";
-import { Search } from "lucide-react";
-import { usersSearch } from "../../../../api/requests";
+import { Search, X } from "lucide-react";
+import { sendInvite, usersSearch } from "../../../../api/requests";
 import { BaseInput } from "../../../../components/BaseInput/BaseInput";
 import { Invite } from "../Invite/Invite";
 import { errorNotification, inviteNotifications } from "../../../../utilities/Notifications";
+import { BaseButton } from "../../../../components/BaseButton/BaseButton";
 
 
-export const ManageAccessModal = ({ closeModal, _id }) => {
+export const ManageAccessModal = ({ _id, permitedUsers, owner }) => {
 
     const [searchValue, setSearchValue] = useState("");
     const [searchedUsers, setSearchedUsers] = useState([]);
@@ -17,21 +18,21 @@ export const ManageAccessModal = ({ closeModal, _id }) => {
     };
 
     const searchSubmit = async () => {
-        if(searchValue === ""){
+        if (searchValue === "") {
             setSearchedUsers([])
             errorNotification("Search input empty!")
             return;
         }
-        const users = await usersSearch({"username": searchValue})
+        const users = await usersSearch({ "username": searchValue })
         setSearchedUsers(users);
     };
 
-    const handleAddUser = async (_userId) => {
-        const result = await sendInvite(_userId, _id)
+    const handleAddUser = async (userId) => {
+        const result = await sendInvite({userId: userId, projectId: _id})
         inviteNotifications.inviteSent()
     }
 
-    const handleRemoveUser = async () => {
+    const handleRemoveUser = async (_userId) => {
         inviteNotifications.inviteSent()
     }
 
@@ -43,19 +44,37 @@ export const ManageAccessModal = ({ closeModal, _id }) => {
                     <h1>Manage access to group</h1>
                     <div className={styles["search"]}>
                         <BaseInput placeHolder="Search..." value={searchValue} onChange={handleSearchChange} />
-                        <Search onClick={searchSubmit}/>
+                        <Search onClick={searchSubmit} />
                     </div>
                 </div>
 
                 <div className={styles["search-results"]}>
-                            {searchedUsers && searchedUsers.map(user =>  <Invite username={user.username} handleAddUser={handleAddUser}/>)}
+                    {searchedUsers.length > 0
+                        ?
+                        searchedUsers.map(user => <Invite username={user.username} handleAddUser={() => (handleAddUser(user._id))} />)
+                        :
+                        <h3>No users found!</h3>}
                 </div>
-
             </div>
 
-            <div>
+            <div className={styles["permited-users"]}>
                 <h2>Access currently avaliable to:</h2>
                 <div>
+
+                    {permitedUsers && permitedUsers.map(user =>
+                        <div className={styles["permited-user"]}>
+                            {user.username}
+                            {owner !== user._id ?
+                                <div className={styles["remove-btn-wrapper"]}>
+                                    <BaseButton buttonLabel={<X />} onClick={() => handleRemoveUser(user._id)} />
+                                </div>
+                                :
+                                <div>
+                                    <p>(YOU)</p>
+                                </div>
+                            }
+                        </div>
+                    )}
 
                 </div>
             </div>

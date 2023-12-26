@@ -51,4 +51,16 @@
 
 .search-results{
     margin-left: 4%;
+    text-align: left;
+}
+
+.permited-users{
+    width: 70%;
+    margin: 2% auto;
+}
+
+.permited-user{
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
 }

@@ -25,9 +25,9 @@ const endPoints = {
     usersSearch: "users/search",
 
     //notifications
-    sendInvite: "/notifications/invite/create",
-    acceptInvite: "/notifications/invite/accept",
-    rejectInvite: "/notifications/invite/reject",
+    sendInvite: "notifications/invite/create",
+    acceptInvite: "notifications/invite/accept",
+    rejectInvite: "notifications/invite/reject",
 }
 
 
