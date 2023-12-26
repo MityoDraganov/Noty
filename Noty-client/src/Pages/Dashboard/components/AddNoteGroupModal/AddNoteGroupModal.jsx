@@ -13,7 +13,7 @@ export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
 
     const [data, setData] = useState({
         title: "",
-        visibility: "private"
+        //visibility: "private"
     })
 
     const onChangeHandler = (e) => {
@@ -23,7 +23,7 @@ export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        if (!data.title || !data.visibility) {
+        if (!data.title) {
             NotesNotifications.emptyFields();
             return;
         }
@@ -45,11 +45,11 @@ export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
                     <BaseInput name="title" onChange={onChangeHandler} value={data.title} />
                 </div>
 
-                <label>Visibility</label>
+                {/* <label>Visibility</label>
                 <select name="visibility" onChange={onChangeHandler} value={data.visibility}>
                     <option value="private">Private</option>
                     <option value="public">Public</option>
-                </select>
+                </select> */}
 
                 <div className={styles["btn-wrapper"]}>
                     <BaseButton type="submit" buttonLabel="Submit" />

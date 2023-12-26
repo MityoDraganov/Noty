@@ -14,7 +14,6 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
 
     const [data, setData] = useState({
         title: title,
-        visibility: visibility
     })
     
 
@@ -26,7 +25,7 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
         e.preventDefault()
         console.log("here");
 
-        if (!data.title || !data.visibility) {
+        if (!data.title) {
             NotesNotifications.emptyFields();
             return;
         }
@@ -54,11 +53,11 @@ export const EditNoteGroupModal = ({ closeModal, setNoteGroups, title, visibilit
                     <BaseInput name="title" onChange={onChangeHandler} value={data.title} />
                 </div>
 
-                <label>Visibility</label>
+                {/* <label>Visibility</label>
                 <select name="visibility" onChange={onChangeHandler} value={data.visibility}>
                     <option value="private">Private</option>
                     <option value="public">Public</option>
-                </select>
+                </select> */}
 
 
                 <div className={styles["btn-wrapper"]}>
