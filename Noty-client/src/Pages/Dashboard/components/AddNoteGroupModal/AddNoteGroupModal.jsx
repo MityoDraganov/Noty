@@ -45,11 +45,7 @@ export const AddNoteGroupModal = ({ closeModal, setNoteGroups }) => {
                     <BaseInput name="title" onChange={onChangeHandler} value={data.title} />
                 </div>
 
-                {/* <label>Visibility</label>
-                <select name="visibility" onChange={onChangeHandler} value={data.visibility}>
-                    <option value="private">Private</option>
-                    <option value="public">Public</option>
-                </select> */}
+
 
                 <div className={styles["btn-wrapper"]}>
                     <BaseButton type="submit" buttonLabel="Submit" />
