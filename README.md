@@ -9,10 +9,15 @@ Noty also allows users to use the application in a Guests mode, in which notes a
 
 # How to execute the project:
 $cd Noty-Client
+<br>
 $npm i
+<br>
 $npm run dev (to run the dev server)
+<br>
 $npm run build (to run the build)
+<br>
 
 # Project requirments:
 -In order for the server to run locally, the project server would be needed
+<br>
 https://github.com/MityoDraganov/Noty-server
